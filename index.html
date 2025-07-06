@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+    <title>Food App V.3 Jagel (Final)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="g-container">
+        <div id="main-feed-view" class="g-view active">
+            <header class="g-top-header">
+                <div class="location-display">
+                    <i data-feather="map-pin"></i>
+                    <span id="current-location-text">Menentukan lokasi...</span>
+                    <button id="edit-location-btn" class="edit-location-btn" style="display: none;">
+                        <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                    </button>
+                </div>
+                <div class="header-main-row">
+                    <div class="search-bar-wrapper">
+                        <div class="search-bar">
+                            <i data-feather="search"></i>
+                            <input type="text" id="search-input" placeholder="Cari makanan atau toko...">
+                        </div>
+                        <div id="search-suggestions"></div>
+                    </div>
+                    <div class="profile-icon">
+                        <i data-feather="user"></i>
+                    </div>
+                </div>
+            </header>
+            <div class="g-banner-container">
+                <img src="https://storage.googleapis.com/storage-ajaib-prd-platform-wp-artifact/2020/04/makanan-khas-jawa.jpg" alt="Banner Promo" onerror="this.style.display='none'">
+            </div>
+            <main>
+                <div id="homepage-scrollers"></div>
+                <div class="g-controls-wrapper">
+                    <div class="g-toggle-container">
+                        <button class="g-toggle-btn active" data-view="produk">Produk</button>
+                        <button class="g-toggle-btn" data-view="toko">Toko</button>
+                    </div>
+                    <div id="category-scroller-wrapper" class="cat-scroller-wrapper">
+                        <div class="cat-scroller" id="category-filter-container"></div>
+                    </div>
+                    <div class="g-sort-container" id="main-sort-buttons">
+                        <button class="g-sort-btn active" data-sort="terdekat">📍 Terdekat</button>
+                        <button class="g-sort-btn" data-sort="buka24jam">🌙 Buka 24 Jam</button>
+                        <button class="g-sort-btn" data-sort="terlaris">🔥 Terlaris</button>
+                        <button class="g-sort-btn" data-sort="rating">⭐ Rating</button>
+                        <button class="g-sort-btn" data-sort="termurah">💰 Termurah</button>
+                    </div>
+                </div>
+                <div id="product-feed-container" class="g-feed g-feed-container active">
+                    <div class="g-skeleton-card"></div>
+                    <div class="g-skeleton-card"></div>
+                </div>
+                <div id="store-list-container" class="g-feed g-feed-container">
+                    <div class="g-skeleton-card"></div>
+                    <div class="g-skeleton-card"></div>
+                </div>
+                <div class="g-load-more-container" style="display: none;">
+                    <button id="load-more-btn" class="g-load-more-btn">Muat Lainnya</button>
+                </div>
+            </main>
+        </div>
+
+        <div id="store-detail-view" class="g-view g-detail-view">
+            <header class="g-header">
+                <a class="back-button"><i data-feather="arrow-left"></i></a>
+                <h1 class="title" id="store-detail-title">Nama Toko</h1>
+            </header>
+            <main>
+                <div id="store-detail-content"></div>
+            </main>
+        </div>
+
+        <div id="search-results-view" class="g-view">
+            <header class="g-header">
+                <a class="back-button"><i data-feather="arrow-left"></i></a>
+                <h1 class="title">Hasil Pencarian</h1>
+            </header>
+            <main>
+                <div id="search-filters" class="g-sort-container">
+                    <button class="g-sort-btn active" data-sort="terdekat">📍 Terdekat</button>
+                    <button class="g-sort-btn" data-sort="terlaris">🔥 Terlaris</button>
+                    <button class="g-sort-btn" data-sort="termurah">💰 Termurah</button>
+                    <button class="g-sort-btn" data-sort="buka24jam">🌙 Buka 24 Jam</button>
+                </div>
+                <div id="search-results-list" class="search-results-list">
+                    <p class="g-loading-text">Mencari...</p>
+                </div>
+            </main>
+        </div>
+
+        <nav class="g-footer-nav">
+            <a href="action://m/68618b18bd0b4" class="footer-item active">
+                <i data-feather="home"></i>
+                <div>Home</div>
+            </a>
+            <a href="action://act/shopping" class="footer-item">
+                <i data-feather="shopping-bag"></i>
+                <div>Pesanan</div>
+            </a>
+            <a href="action://act/message_list" class="footer-item">
+                <i data-feather="mail"></i>
+                <div>Inbox</div>
+            </a>
+            <a href="action://act/profile" class="footer-item">
+                <i data-feather="user"></i>
+                <div>Profil</div>
+            </a>
+        </nav>
+
+        <div id="location-modal" class="g-modal-overlay">
+            <div class="g-modal-content">
+                <div class="g-modal-header">
+                    <h3>Ubah Lokasi Anda</h3>
+                    <button class="g-modal-close-btn"><i data-feather="x"></i></button>
+                </div>
+                <div class="g-modal-body">
+                    <div id="modal-map-placeholder">
+                        <p>Coming Sooon.....</p>
+                    </div>
+                    <input type="text" id="location-input-address" placeholder="Masukkan alamat atau nama tempat">
+                </div>
+                <div class="g-modal-footer">
+                    <button id="save-location-btn" class="g-btn-primary">Simpan Alamat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/script/main.js"></script>
+</body>
+</html>
